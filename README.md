@@ -11,8 +11,3 @@
 
 1. *django*
 1. *django rest framework*
-
-App Demonstration: 
-
-![GitHub Logo](/Desing/login.pdf)
-Format: ![Alt Text](url)

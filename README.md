@@ -4,7 +4,7 @@
 
 1. *react-native*
 1. *redux*
-1. *redux-thunks*
+1. *redux-thunk*
 1. *react-navigation*
 
 **Back end Techs**

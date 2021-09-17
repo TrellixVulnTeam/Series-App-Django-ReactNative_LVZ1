@@ -8,8 +8,8 @@ class GenresSerializer(serializers.ModelSerializer):
         fields = ['title']
 
 class SeriesSerializer(serializers.ModelSerializer):
-    genres = GenresSerializer(many=True, read_only=True)
+    genres = GenresSerializer(many=True, required=False)
 
     class Meta():
         model = Series
-        fields = ['title', 'note', 'description', 'img_series']
+        fields = ['user_key', 'title', 'note', 'description', 'img_series', 'genres']

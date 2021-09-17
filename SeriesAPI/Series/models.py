@@ -14,9 +14,11 @@ class Series(models.Model):
         return self.title
 
 class Genres(models.Model):
-    user_key = models.ForeignKey(Series, related_name='genres', on_delete=models.CASCADE)
+    serie_key = models.ForeignKey(Series, related_name='genres', on_delete=models.CASCADE)
 
     title = models.CharField(max_length=100)
 
     def __str__(self):
         return self.title
+
+

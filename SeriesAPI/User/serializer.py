@@ -2,12 +2,14 @@ from rest_framework.serializers import ModelSerializer
 from User.models import CustomUser
 from django.contrib.auth.hashers import make_password
 from rest_framework.authtoken.models import Token
+from Series.serializer import SeriesSerializer
 
 class CustomUserSerializer(ModelSerializer):
+    series = SeriesSerializer(many=True, required=False)
 
     class Meta():
         model = CustomUser
-        fields = ['id', 'email', 'username', 'password']
+        fields = ['id', 'email', 'username', 'password', 'series']
 
         extra_kwargs = {
             "password":{

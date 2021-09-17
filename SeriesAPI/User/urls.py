@@ -5,5 +5,5 @@ from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
     path('auth/', obtain_auth_token),
-    path('singup/', CustomUserViewSet.as_view(), name='singup')
+    path('singup/', CustomUserViewSet.as_view(), name='singup'),
 ]

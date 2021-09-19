@@ -1,114 +1,94 @@
-from django.http.response import JsonResponse
-from rest_framework.renderers import JSONRenderer
-from django.shortcuts import get_object_or_404
-from rest_framework import serializers
-
-from rest_framework.views import APIView
-
+from rest_framework import generics
 from rest_framework.response import Response
-from Series import serializer, models
-
+from Series import models, serializer
 from rest_framework.authentication import TokenAuthentication
-from rest_framework.permissions import IsAuthenticated
-
 from rest_framework.authtoken.models import Token
 
-
-#para a funcao de model funcionar
-#é necessario passa-la nos kwargs
-class Request_Handler():
-    def __init__(self, **kwargs):
-        self.user__related_names_and_models = kwargs['models']
-
-    def Get_user_by_token_or_obj_error(self, request):
-        user = Token.objects.get(key=request.auth).user
-        return user
-
-    def ListMode(self, request):
-        userobj_models_list = []
-
-        for model in self.user__related_names_and_models:
-            userobj_models_list.append(self.Get_user_by_token(request).model['related_name'].all())
-
-        return userobj_models_list
-
-    def RetrieveMode(self, related_name, pk, request):
-        return self.Get_user_by_token(request).related_name.get(pk=pk)
-
-class SeriesAPIView(APIView, Request_Handler):
+class GenericSeriesAPIView(generics.GenericAPIView):
+    serializer_class = serializer.SeriesSerializer
+    queryset = models.Series.objects.all()
     authentication_classes = [TokenAuthentication]
-    renderer_classes = [JSONRenderer]
+
+    def list(self, request, **kwargs):
+        #using get_queryset
+        if kwargs['page1'] == None or kwargs['page2'] == None:
+            try:
+                query_set_filter = self.get_queryset().filter(user_key=Token.objects.get(key=request.auth).user)
+            except:
+                return Response({"error":"token was not passed [are you sure that you re authenticated?]"})
+        elif kwargs['page1'] > -1 and kwargs['page2'] > -1:
+            try:
+                query_set_filter = self.get_queryset().filter(user_key=Token.objects.get(key=request.auth).user)[kwargs['page1']:kwargs['page2']]
+            except:
+                return Response({"error":"token was not passed [are you sure that you re authenticated?]"})
+        query_set_serialized = serializer.SeriesSerializer(query_set_filter, many=True)
+
+        return Response(query_set_serialized.data)
+
+    def create(self, request):
+        get_model_from_request_data = serializer.SeriesSerializer(data=request.data)
+
+        if get_model_from_request_data.is_valid():
+            get_instanceModel = get_model_from_request_data.save(commit=False)
+            try:
+                get_instanceModel.user_key = Token.objects.get(key=request.auth).user
+            except:
+                return Response({"error":"token was not passed [are you sure that you re authenticated?]"})
+            get_instanceModel.save()
+
+            return Response({"success":"model obj created with success"})
+        else:
+            return Response({"error":"model obj was not created [did you send the correct data type?]"})
+
+    def retrieve(self, request, pk):
+        try:
+            query_set_filter = self.get_queryset().filter(user_key=Token.objects.get(key=request.auth).user).get(pk=pk)
+        except:
+            return Response({"error":"token was not passed [are you sure that you re authenticated?] or incorrect pk"})
+        
+        query_set_serialized = serializer.SeriesSerializer(query_set_filter)
+
+        return Response(query_set_serialized.data)
+
+    def destroy(self, request, pk):
+        try:
+            query_set_filter = self.get_queryset().filter(user_key=Token.objects.get(key=request.auth).user).get(pk=pk)
+        except:
+            return Response({"error":"token was not passed [are you sure that you re authenticated?] or incorrect pk"})
+
+        query_set_filter.delete
+
+        return Response({"success":"the obj was deleted with success"})
+
+    def update(self, request, pk):
+        try:
+            query_set_filter = self.get_queryset().filter(user_key=Token.objects.get(key=request.auth).user).get(pk=pk)
+        except:
+            return Response({"error":"token was not passed [are you sure that you re authenticated?] or incorrect pk"})
+
+        updated_model = serializer.SeriesSerializer(query_set_filter, data=request.data)
+
+        if updated_model.is_valid():
+            updated_model.save()
+            return Response({"success":"obj updated with success"})
+        else:
+            return Response({"error":"model obj was not created [did you send the correct data type?]"})
+
+    def get(self, request, pk=None, n__series=None, x__series=None):
+        if pk == None:
+            if n__series == None or x__series == None:
+                return self.list(request, page1=None, page2=None)
+            else:
+                return self.list(request , page1=n__series, page2=x__series)
+        else:
+            return self.retrieve(request, pk)
 
     def post(self, request):
-        series_serialized = serializer.SeriesSerializer(data=request.data)
-
-        if series_serialized.is_valid():
-            instance = series_serialized.save(commit=False)
-            instance.user_key = self.Get_user_by_token_or_obj_error(request)
-            instance.save()
-            return Response({'Success': 'obj created with success'})
-        else:
-            return Response(series_serialized.error_messages)
-
-    def get(self, request):
-        try:
-            user_instance = self.Get_user_by_token_or_obj_error(request)
-        except:
-            return Response({"error":"auth not provided"})
-
-        list_user_obj = user_instance.series.all()
-
-        serialized_list_user_obj = serializer.SeriesSerializer(list_user_obj)
-        print(serialized_list_user_obj.data, "aqui")
-
-        return Response(serialized_list_user_obj.data)
-
-class SeriesAPIViewDetail(APIView, Request_Handler):
-    authentication_classes = [TokenAuthentication]
-    renderer_classes = [JSONRenderer]
-
-    def delete(self, request, pk):
-        user_instance = self.Get_user_by_token_or_obj_error(request)
-        try:
-            model_instance = user_instance.series.get(pk=pk)
-        except:
-            Response({"error":"could not find this obj from user"})
-
-        model_instance.delete()
+        return self.create(request)
 
     def put(self, request, pk):
-        user_instance = self.Get_user_by_token_or_obj_error(request)
+        return self.update(request, pk)
 
-        try:
-            model_instance = user_instance.series.objects.get(pk=pk)
-        except:
-            Response({"error":"could not find this obj from user"})
-
-        serialized_update_request = serializer.SeriesSerializer(model_instance, data=request.data)
-
-        if serialized_update_request.is_valid():
-            instance = serialized_update_request.save(commit=False)
-            instance.user_key = user_instance
-            instance.save()
-            return Response({"success": "the obj was created with success"})
-        else:
-            return Response(serialized_update_request.error_messages)
-
-    def get(self, request, pk):
-        user_instance = self.Get_user_by_token_or_obj_error(request)
-
-        try:
-            model_instance = user_instance.series.objects.get(pk=pk)
-        except:
-            Response({"error":"could not find this obj from user"})
-
-        serialized_model_instance = serializer.SeriesSerializer(model_instance)
-
-        return Response(serialized_model_instance.data)
-    
-
-
+    def delete(self, request, pk):
+        return self.destroy(request, pk)
         
-
-
-

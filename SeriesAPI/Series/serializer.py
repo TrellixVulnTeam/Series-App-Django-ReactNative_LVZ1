@@ -12,4 +12,4 @@ class SeriesSerializer(serializers.ModelSerializer):
 
     class Meta():
         model = Series
-        fields = ['user_key', 'title', 'note', 'description', 'img_series', 'genres']
+        fields = ['title', 'note', 'description', 'img_series', 'genres']

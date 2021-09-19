@@ -3,11 +3,13 @@ from rest_framework.response import Response
 from Series import models, serializer
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.models import Token
+from rest_framework.renderers import JSONRenderer
 
 class GenericSeriesAPIView(generics.GenericAPIView):
     serializer_class = serializer.SeriesSerializer
     queryset = models.Series.objects.all()
     authentication_classes = [TokenAuthentication]
+    renderer_classes = [JSONRenderer]
 
     def list(self, request, **kwargs):
         #using get_queryset

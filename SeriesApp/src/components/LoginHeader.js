@@ -25,8 +25,8 @@ const style = StyleSheet.create({
         color:`${Colors_services.Get_ColorsPack()["Roxo_claro"]}`
     },
     container:{
-        flex:1,
-        marginTop:20
+        flex:2,
+        justifyContent: 'center'
     }
 })
 

@@ -4,19 +4,18 @@ import { View, Text, Button, StyleSheet } from 'react-native';
 
 import Colors_services from '../utils/Colors_layout';
 
-const ButtomLogin = (props) => {
-
-    const OnPress_Register
+const ButtomRegister= (props) => {
 
     return(
         <View style={style.container}>
+            <Text style={[style.inputStrongColor, style.inputTop]}>Forgot your password?</Text>
             <Button
                 style={style.buttomStyle}
                 title="Sing in"
                 color={Colors_services.Get_ColorsPack()["Roxo_escuro"]}
             />
             <Text style={[style.inputColor, style.inputBottom]}>Dont you have an account? 
-                <Text style={style.inputStrongColor} onPress={} > Register here!</Text>
+                <Text style={style.inputStrongColor}> Register here!</Text>
             </Text>
         </View>
     );
@@ -47,4 +46,4 @@ const style = StyleSheet.create({
     }
 })
 
-export default ButtomLogin;
+export default ButtomRegister;

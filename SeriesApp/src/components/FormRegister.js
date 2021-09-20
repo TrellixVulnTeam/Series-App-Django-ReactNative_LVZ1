@@ -9,7 +9,7 @@ import { OnchangeUsername, OnchangePassword } from '../store/counterslice';
 
 import Colors_services from '../utils/Colors_layout';
 
-const FormLogin = (props) => {
+const FormRegister = (props) => {
     const username = useSelector((state) => state.login_reducer.username);
     const password = useSelector((state) => state.login_reducer.password);
     const dispatch = useDispatch();
@@ -72,4 +72,4 @@ const style = StyleSheet.create({
     }
 })
 
-export default FormLogin;
+export default FormRegister;

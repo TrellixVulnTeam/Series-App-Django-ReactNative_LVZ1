@@ -19,10 +19,8 @@ export default class Loginpage extends React.Component{
 
     render(){
         return (
-                <KeyboardAwareScrollView 
-                    contentContainerStyle={style.container}
-                    scrollEnabled={true}
-                >
+                <KeyboardAwareScrollView keyboardShouldPersistTaps={'always'}
+                    contentContainerStyle={style.container}>
                     <LoginHeader />
                     <FormLogin />
                     <ButtomLogin />
@@ -33,10 +31,9 @@ export default class Loginpage extends React.Component{
 
 const style = StyleSheet.create({
     container:{
-        flexDirection: 'column',
-        flex:1,
-        justifyContent: 'space-between',
         padding: 20,
         backgroundColor: 'white',
+        flexShrink: 0,
+        flexGrow: 1
     },
 })

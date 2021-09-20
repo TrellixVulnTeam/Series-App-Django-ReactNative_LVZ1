@@ -6,14 +6,19 @@ import Loginpage from './src/pages/Loginpage';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+import store from './src/store/store';
+import { Provider } from 'react-redux';
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Login" component={Loginpage}/>
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Login" component={Loginpage}/>
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }

@@ -1,7 +1,8 @@
 import React from 'react';
-import { useState } from 'react';
 import { View, StyleSheet, Text} from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
+
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { OnchangeUsername, OnchangePassword } from '../store/counterslice';
@@ -23,27 +24,27 @@ const FormLogin = (props) => {
     }
 
     return(
-        <View style={style.container}>
-            <View style={style.view_input}>
-                <Text style={style.input}>Username</Text>
-                <TextInput
-                    value={username.payload}
-                    onChangeText={(value) => OnUsernameChange(value)}
-                    multiline={true}
-                    style={style.textinput}
-                />
+            <View style={style.container}>
+                <View style={style.view_input}>
+                    <Text style={style.input}>Username</Text>
+                    <TextInput
+                        value={username.payload}
+                        onChangeText={(value) => OnUsernameChange(value)}
+                        multiline={true}
+                        style={style.textinput}
+                    />
+                </View>
+                <View style={style.view_input}>
+                    <Text style={style.input}>Password</Text>
+                    <TextInput
+                        placeholder="********"
+                        value={password.payload}
+                        secureTextEntry={true}
+                        onChangeText={(value) => OnPasswordChange(value)}
+                        style={style.textinput}
+                    />
+                </View>
             </View>
-            <View style={style.view_input}>
-                <Text style={style.input}>Password</Text>
-                <TextInput
-                    placeholder="********"
-                    value={password.payload}
-                    secureTextEntry={true}
-                    onChangeText={(value) => OnPasswordChange(value)}
-                    style={style.textinput}
-                />
-            </View>
-        </View>
     );
 }
 
@@ -53,15 +54,19 @@ const style = StyleSheet.create({
         justifyContent: 'space-around'
     },
     view_input:{
-        flex:1
+        flex:1,
+        justifyContent: 'space-around',
+        padding:5
     },
     textinput:{
-        height:60,
         flex:1,
-        borderBottomWidth : 1.0
+        backgroundColor: `${Colors_services.Get_ColorsPack()["Cinza_claro"]}`,
+        padding:10,
+        borderRadius: 10
     },
     input:{
-        color: `${Colors_services.Get_ColorsPack()["Roxo_claro"]}`
+        color: `${Colors_services.Get_ColorsPack()["Roxo_claro"]}`,
+        marginBottom: 5
     }
 })
 

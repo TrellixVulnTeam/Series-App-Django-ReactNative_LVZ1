@@ -8,13 +8,13 @@ const ButtomLogin = (props) => {
 
     return(
         <View style={style.container}>
-            <Text style={style.inputStrongColor}>Forgot your password?</Text>
+            <Text style={[style.inputStrongColor, style.inputTop]}>Forgot your password?</Text>
             <Button
                 style={style.buttomStyle}
                 title="Sing in"
                 color={Colors_services.Get_ColorsPack()["Roxo_escuro"]}
             />
-            <Text style={style.inputColor}>Dont you have an account? 
+            <Text style={[style.inputColor, style.inputBottom]}>Dont you have an account? 
                 <Text style={style.inputStrongColor}> Register here!</Text>
             </Text>
         </View>
@@ -23,14 +23,24 @@ const ButtomLogin = (props) => {
 
 const style = StyleSheet.create({
     inputColor:{
-        color: `${Colors_services.Get_ColorsPack()["Azul_claro"]}`
+        color: `${Colors_services.Get_ColorsPack()["Azul_claro"]}`,
+    },
+    inputTop:{
+        marginBottom:20,
+        marginLeft: 'auto',
+        marginRight: 'auto'
+    },
+    inputBottom:{
+        marginTop:20,
+        marginLeft: 'auto',
+        marginRight: 'auto'
     },
     inputStrongColor:{
         color: `${Colors_services.Get_ColorsPack()["Azul_escuro"]}`
     },
     container:{
-        flex:2,
-        justifyContent: 'space-around',
+        flex:1.5,
+        justifyContent: 'center'
     },
     buttomStyle:{
     }

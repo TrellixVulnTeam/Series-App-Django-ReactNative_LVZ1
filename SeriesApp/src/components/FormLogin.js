@@ -16,7 +16,6 @@ const FormLogin = (props) => {
 
     const OnUsernameChange = (value) => {
         dispatch(OnchangeUsername({type:'username_change', payload:value}));
-        console.log(username.payload);
     }
 
     const OnPasswordChange = (value) => {
@@ -50,21 +49,21 @@ const FormLogin = (props) => {
 
 const style = StyleSheet.create({
     container:{
-        flex: 1,
-        justifyContent: 'space-around',
+        flex: 0.2,
+        justifyContent: 'center',
         paddingBottom: 10,
         paddingTop: 10
     },
     view_input:{
         flex:1,
-        justifyContent: 'space-around',
+        justifyContent: 'center',
         padding:5,
     },
     textinput:{
-        flex:1,
         backgroundColor: `${Colors_services.Get_ColorsPack()["Cinza_claro"]}`,
         padding:5,
-        borderRadius: 10
+        borderRadius: 10,
+        minHeight: 50
     },
     input:{
         color: `${Colors_services.Get_ColorsPack()["Roxo_claro"]}`,

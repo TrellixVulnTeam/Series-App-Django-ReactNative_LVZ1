@@ -6,7 +6,10 @@ import Colors_services from '../utils/Colors_layout';
 
 const ButtomLogin = (props) => {
 
-    const OnPress_Register
+    const OnPress_Register = () => {
+        navigation.navigate('Register');
+    }
+    const { navigation } = props;
 
     return(
         <View style={style.container}>
@@ -16,7 +19,7 @@ const ButtomLogin = (props) => {
                 color={Colors_services.Get_ColorsPack()["Roxo_escuro"]}
             />
             <Text style={[style.inputColor, style.inputBottom]}>Dont you have an account? 
-                <Text style={style.inputStrongColor} onPress={} > Register here!</Text>
+                <Text style={style.inputStrongColor} onPress={() => {OnPress_Register()}} > Register here!</Text>
             </Text>
         </View>
     );

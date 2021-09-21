@@ -4,7 +4,9 @@ export const reducersPayload = createSlice({
     name: 'reducers',
     initialState: {
       username: "",
-      password:""
+      password:"",
+      confirm_password:"",
+      email:""
     },
     reducers: {
       OnchangeUsername: (state, action) => {
@@ -12,6 +14,12 @@ export const reducersPayload = createSlice({
       },
       OnchangePassword: (state, action) => {
         state.password = action.payload
+      },
+      OnchangeConfirmPassword: (state, action) => {
+        state.confirm_password = action.payload
+      },
+      OnchangeEmail: (state, action) => {
+        state.email = action.payload
       },
     },
 })

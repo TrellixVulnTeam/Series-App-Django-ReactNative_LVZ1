@@ -11,9 +11,10 @@ export default class RegisterPage extends React.Component{
     constructor(props){
         super(props);
 
+        const { navigation } = props;
+
         this.state = {
-            error: false,
-            loading: false,
+            navigation: navigation
         }
     }
 
@@ -23,7 +24,7 @@ export default class RegisterPage extends React.Component{
                     contentContainerStyle={style.container}>
                     <RegisterHeader />
                     <FormRegister />
-                    <ButtomRegister />
+                    <ButtomRegister navigation={this.state.navigation} />
                 </KeyboardAwareScrollView>
         )
     }

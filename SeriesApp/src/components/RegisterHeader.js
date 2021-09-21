@@ -6,9 +6,9 @@ import Colors_services from '../utils/Colors_layout';
 const RegisterHeader = (props) => {
     return (
         <View style={style.container}>
-            <Text style={style.singup}>Sing in</Text>
+            <Text style={style.singup}>Register</Text>
             <View>
-                <Text style={style.welcome}>Welcome!</Text>
+                <Text style={style.welcome}>Sing up!</Text>
             </View>
         </View>
     )

@@ -3,6 +3,7 @@ import { View, StyleSheet, Text} from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { useSharedValue } from 'react-native-reanimated';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { OnchangeUsername, OnchangePassword } from '../store/counterslice';
@@ -12,15 +13,25 @@ import Colors_services from '../utils/Colors_layout';
 const FormRegister = (props) => {
     const username = useSelector((state) => state.login_reducer.username);
     const password = useSelector((state) => state.login_reducer.password);
+    const email = useSelector((state) => state.login_reducer.email);
+    const confirm_password = useSelector((state) => state.login_reducer.confirm_password);
+
     const dispatch = useDispatch();
 
     const OnUsernameChange = (value) => {
         dispatch(OnchangeUsername({type:'username_change', payload:value}));
-        console.log(username.payload);
     }
 
     const OnPasswordChange = (value) => {
         dispatch(OnchangePassword({type:'password_change', payload:value}));
+    }
+    
+    const OnConfirmPasswordChange = (value) => {
+        dispatch(OnchangeConfirmPassword({type:'confirm_password_change', payload:value}));
+    }
+
+    const OnEmailChange = (value) => {
+        dispatch(OnchangeEmail({type:'email_change', payload:value}));
     }
 
     return(
@@ -35,12 +46,31 @@ const FormRegister = (props) => {
                     />
                 </View>
                 <View style={style.view_input}>
+                    <Text style={style.input}>Email</Text>
+                    <TextInput
+                        value={email.payload}
+                        onChangeText={(value) => OnEmailChange(value)}
+                        multiline={true}
+                        style={style.textinput}
+                    />
+                </View>
+                <View style={style.view_input}>
                     <Text style={style.input}>Password</Text>
                     <TextInput
                         placeholder="********"
                         value={password.payload}
                         secureTextEntry={true}
                         onChangeText={(value) => OnPasswordChange(value)}
+                        style={style.textinput}
+                    />
+                </View>
+                <View style={style.view_input}>
+                    <Text style={style.input}>Confirm Password</Text>
+                    <TextInput
+                        placeholder="********"
+                        value={confirm_password.payload}
+                        secureTextEntry={true}
+                        onChangeText={(value) => OnConfirmPasswordChange(value)}
                         style={style.textinput}
                     />
                 </View>

@@ -1,5 +1,5 @@
 import React from 'react';
-import Colors_services from '../utils/Colors_layout';
+import Colors_services from '../../utils/Colors_layout';
 
 import { StyleSheet, View, Text} from 'react-native';
 

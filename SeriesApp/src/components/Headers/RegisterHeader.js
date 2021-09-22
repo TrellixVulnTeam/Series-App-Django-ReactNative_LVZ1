@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Colors_services from '../utils/Colors_layout';
+import Colors_services from '../../utils/Colors_layout';
 
 const RegisterHeader = (props) => {
     return (

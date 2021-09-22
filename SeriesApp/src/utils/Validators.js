@@ -5,6 +5,15 @@ export default class Validators {
         return inputString === "";
     }
 
+    static Validate_nonEmptyInputList = (listInputString) => {
+        for(var Input in listInputString){
+            if(listInputString[Input] === undefined){
+                return false;
+            }
+        }
+        return true;
+    }
+
     static Validate_EmailInput = (inputEmail) => {
         if(inputEmail.includes("@")){
             return true;

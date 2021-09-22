@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import LoginHeader from '../components/LoginHeader';
-import FormLogin from '../components/FormLogin';
-import ButtomLogin from '../components/ButtomLogin';
+import LoginHeader from '../components/Headers/LoginHeader';
+import FormLogin from '../components/Forms/FormLogin';
+import ButtomLogin from '../components/Buttons/ButtomLogin';
 
 import { useSelector, useDispatch } from 'react-redux';
 import store from '../store/store';

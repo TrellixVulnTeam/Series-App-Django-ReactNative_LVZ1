@@ -10,4 +10,10 @@ export default class APIServices{
         
         return axios.post(Link_auth, obj_user);
     }
+
+    static SingupUser(obj_user){
+        let Link_auth = Server_link + 'singup/';
+
+        return axios.post(Link_auth, obj_user);
+    } 
 }

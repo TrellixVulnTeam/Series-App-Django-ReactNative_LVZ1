@@ -6,9 +6,10 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { useSharedValue } from 'react-native-reanimated';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { OnchangeUsername, OnchangePassword } from '../store/counterslice';
+import { OnchangeUsername, OnchangePassword, OnchangeConfirmPassword, OnchangeEmail } from '../store/counterslice';
 
 import Colors_services from '../utils/Colors_layout';
+import Size_services from '../utils/Size_layout';
 
 const FormRegister = (props) => {
     const username = useSelector((state) => state.login_reducer.username);
@@ -91,10 +92,10 @@ const style = StyleSheet.create({
         padding:5,
     },
     textinput:{
-        flex:1,
         backgroundColor: `${Colors_services.Get_ColorsPack()["Cinza_claro"]}`,
         padding:5,
-        borderRadius: 10
+        borderRadius: 10,
+        minHeight: Size_services.Get_SizePack()["layout_form_height"]
     },
     input:{
         color: `${Colors_services.Get_ColorsPack()["Roxo_claro"]}`,

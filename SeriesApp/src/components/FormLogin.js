@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Text} from 'react-native';
+import { View, StyleSheet, Text, ActivityIndicator} from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -8,6 +8,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { OnchangeUsername, OnchangePassword } from '../store/counterslice';
 
 import Colors_services from '../utils/Colors_layout';
+import Size_services from '../utils/Size_layout';
+
+import Warning from './Warning';
 
 const FormLogin = (props) => {
     const username = useSelector((state) => state.login_reducer.username);
@@ -24,6 +27,8 @@ const FormLogin = (props) => {
 
     return(
             <View style={style.container}>
+                {props.error ? <Warning error_message={props.error_message}/> : null}
+
                 <View style={style.view_input}>
                     <Text style={style.input}>Username</Text>
                     <TextInput
@@ -63,7 +68,7 @@ const style = StyleSheet.create({
         backgroundColor: `${Colors_services.Get_ColorsPack()["Cinza_claro"]}`,
         padding:5,
         borderRadius: 10,
-        minHeight: 50
+        minHeight: Size_services.Get_SizePack()["layout_form_height"]
     },
     input:{
         color: `${Colors_services.Get_ColorsPack()["Roxo_claro"]}`,

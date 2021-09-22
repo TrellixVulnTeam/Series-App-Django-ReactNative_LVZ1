@@ -2,14 +2,24 @@ import { setStatusBarStyle } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 
+import { useSelector } from 'react-redux';
+
 import Colors_services from '../utils/Colors_layout';
 
 const ButtomLogin = (props) => {
 
+    const { navigation } = props;
+
     const OnPress_Register = () => {
         navigation.navigate('Register');
     }
-    const { navigation } = props;
+
+    const username = useSelector((state) => state.login_reducer.username);
+    const password = useSelector((state) => state.login_reducer.password);
+
+    const OnPress_SingIn = () => {
+        props.OnPress_SingIn({username:username.payload, password:password.payload});
+    }
 
     return(
         <View style={style.container}>
@@ -17,6 +27,7 @@ const ButtomLogin = (props) => {
                 style={style.buttomStyle}
                 title="Sing in"
                 color={Colors_services.Get_ColorsPack()["Roxo_escuro"]}
+                onPress={() => OnPress_SingIn()}
             />
             <Text style={[style.inputColor, style.inputBottom]}>Dont you have an account? 
                 <Text style={style.inputStrongColor} onPress={() => {OnPress_Register()}} > Register here!</Text>

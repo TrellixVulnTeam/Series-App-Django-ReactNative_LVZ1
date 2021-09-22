@@ -5,10 +5,11 @@ const colors_package = {
     "Roxo_claro":"#9964AB",
     "Azul_claro":"#4047E7",
     "Azul_escuro":"blue",
-    "Cinza_claro":"#e6e6fa"
+    "Cinza_claro":"#e6e6fa",
+    "Vermelho_escuro":"red"
 }
 
-export default class Colors_services extends React.Component{
+export default class Colors_services {
     
     static Get_ColorsPack(){
         return colors_package;

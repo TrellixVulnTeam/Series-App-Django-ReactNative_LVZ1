@@ -6,7 +6,8 @@ const colors_package = {
     "Azul_claro":"#4047E7",
     "Azul_escuro":"blue",
     "Cinza_claro":"#e6e6fa",
-    "Vermelho_escuro":"red"
+    "Vermelho_escuro":"red",
+    "Cinza_escuro":"#464646"
 }
 
 export default class Colors_services {

@@ -12,7 +12,7 @@ import APIServices from '../APIServices/APIServices';
 import { TokenSet } from '../store/counterslice';
 import Colors_services from '../utils/Colors_layout';
 
-const Loginpage = (props) => {
+const LoginPage = (props) => {
     const { navigation } = props;
 
     const [ error, setError ] = useState("");
@@ -27,7 +27,6 @@ const Loginpage = (props) => {
             dispatch(TokenSet({type:"token_set",payload:response.data.token}));
             setLoading(false);
             setError(false);
-            navigation.navigate("Register");
         })
         .catch((error) => {
             setLoading(false);
@@ -78,4 +77,4 @@ const style = StyleSheet.create({
     }
 })
 
-export default Loginpage;
+export default LoginPage;

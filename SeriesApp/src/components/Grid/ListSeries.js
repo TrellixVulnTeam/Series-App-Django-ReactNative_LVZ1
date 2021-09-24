@@ -13,14 +13,15 @@ export default function ListSeries (props){
     console.log(series);
 
     return(
-        <View>
-            <FlatList 
+        <View style={style.container}>
+            {series.length !== 0 ? <FlatList 
                 style={style.container}
+                contentContainerStyle={style.containerList}
                 data={series}
                 numColumns={row}
                 renderItem={(item) => {return <SerieContainer serie={item} />}}
                 keyExtractor={(item) => item.id}
-            />
+            /> : null}
         </View>
     )
 }
@@ -32,5 +33,8 @@ const style = StyleSheet.create({
     },
     container:{
         flex: 1,
+    },
+    containerList:{
+        marginHorizontal: 15,
     }
 })

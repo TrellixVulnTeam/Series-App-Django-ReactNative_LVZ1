@@ -53,7 +53,13 @@ function App(props) {
           }
         }}/>
         <Stack.Screen  name="Settings" component={Settings} />
-        <Stack.Screen  name="AddPage" component={AddPage} />
+        <Stack.Screen  name="AddPage" component={AddPage} options={{
+          title:'Add a new Serie',
+          headerStyle:{
+            backgroundColor: `${Colors_services.Get_ColorsPack()["Roxo_escuro"]}`,
+          },
+          headerTintColor:'white'
+        }}/>
         <Stack.Screen  name="DetailPage" component={DetailPage} />
         </>
         ) 

@@ -19,11 +19,21 @@ const LandingPage = (props) => {
     const [ error, setError ] = useState(false);
     const [ error_message, setMessage ] = useState("");
 
+    const newSerie = store.getState().login_reducer.new_app;
     const token = store.getState().login_reducer.token;
 
     useEffect(() => {
         Get_series();
     }, [])
+
+    useEffect(() => {
+        Add_NewSerie()
+    },[newSerie])
+
+    const Add_NewSerie = () => {
+        const series = [...series, newSerie];
+        setSeries(series);
+    }
 
     const Is_Loading = () => {
         if (loading){

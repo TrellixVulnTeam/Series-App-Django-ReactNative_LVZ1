@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Colors_services from '../../utils/Colors_layout';
+import Size_services from '../../utils/Size_layout';
 
 const RegisterHeader = (props) => {
     return (
@@ -17,7 +18,7 @@ const RegisterHeader = (props) => {
 const style = StyleSheet.create({
     singup:{
         color:`${Colors_services.Get_ColorsPack()["Roxo_escuro"]}`,
-        fontSize:60
+        fontSize: Size_services.Get_SizePack()["layout_form_height"]
     },
     welcome:{
         color:`${Colors_services.Get_ColorsPack()["Roxo_claro"]}`

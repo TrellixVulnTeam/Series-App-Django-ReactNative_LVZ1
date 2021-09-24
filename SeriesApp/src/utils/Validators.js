@@ -7,7 +7,7 @@ export default class Validators {
 
     static Validate_nonEmptyInputList = (listInputString) => {
         for(var Input in listInputString){
-            if(listInputString[Input] === undefined){
+            if(listInputString[Input] === undefined || listInputString[Input] === ""){
                 return false;
             }
         }

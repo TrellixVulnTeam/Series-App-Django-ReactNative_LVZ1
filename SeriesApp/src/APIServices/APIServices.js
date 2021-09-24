@@ -53,11 +53,25 @@ export default class APIServices{
                 return axios.get(Link_auth, {
                     auth: `Token ${token.payload}`
                 });
-
-            case 'POST':
-                Link_auth = Server_link + 'series/';
-                const obj_postParam = Object.assign({headers:{Authorization: `Token ${token.payload}`}}, action.payload);
-                return axios.post(Link_auth, obj_postParam);
         }
+    }
+
+    static PostSerie(token, obj_json, image){
+        var form = FormData();
+        form.append("Seriepic", image);
+        form.append("note", obj_json.note);
+        form.append("title", obj_json.title);
+        form.append("description", obj_json.description);
+
+        return axios({
+            method: 'POST',
+            url: Server_link + 'series/',
+            data: form,
+            headers:{
+                'Authorization': "Token  "  +  token,
+                'Accept': 'application/json',
+                'Content-Type': 'multipart/form-data;'
+            }
+        })
     }
 }

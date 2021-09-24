@@ -12,8 +12,6 @@ export default function SerieContainer(props){
     const { serie } = props;
 
     console.log(serie);
-    console.log(Server_linkMain + serie.item.img_series);
-    console.log(Dimensions.get('window').width/row);
 
     return(
         <View style={style.container}>
@@ -35,7 +33,7 @@ export default function SerieContainer(props){
 const style = StyleSheet.create({
     container:{
         flex:1,
-        height: Dimensions.get('window').width / row,
+        height:250,
         margin:10,
     },
     imageStyle:{

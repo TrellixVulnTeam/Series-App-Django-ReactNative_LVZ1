@@ -7,7 +7,8 @@ export const reducersPayload = createSlice({
       password:"",
       confirm_password:"",
       email:"",
-      token:null
+      token:null,
+      new_app:null
     },
     reducers: {
       OnchangeUsername: (state, action) => {
@@ -24,12 +25,14 @@ export const reducersPayload = createSlice({
       },
       TokenSet: (state, action) => {
         state.token = action.payload;
+      },
+      NewAppSet: (state, action) => {
+        state.new_app = action.payload;
       }
     },
 })
 
-
 // Action creators are generated for each case reducer function
-export const { OnchangeUsername, OnchangePassword, OnchangeConfirmPassword, OnchangeEmail, TokenSet } = reducersPayload.actions;
+export const { OnchangeUsername, OnchangePassword, OnchangeConfirmPassword, OnchangeEmail, TokenSet, NewAppSet } = reducersPayload.actions;
 
 export default reducersPayload.reducer;

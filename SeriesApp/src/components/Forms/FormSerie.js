@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TextInput } from 'react-native';
 
 import Colors_services from '../../utils/Colors_layout';
 import Size_services from '../../utils/Size_layout';
+import Imagepicker from '../Image/ImagePicker';
 
 import { useDispatch } from 'react-redux';
 import store from '../../store/store';
@@ -26,6 +27,9 @@ export default function FormSerie(props){
                     multiline={true}
                     style={style.textinput}
                 />
+            </View>
+            <View style={style.view_input}>
+                <Imagepicker />
             </View>
         </View>
     )

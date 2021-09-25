@@ -2,35 +2,30 @@ import { setStatusBarStyle } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 
-import { useSelector } from 'react-redux';
-
 import Colors_services from '../../utils/Colors_layout';
 
-const ButtomLogin = (props) => {
+const ButtonRegister = (props) => {
 
     const { navigation } = props;
 
-    const OnPress_Register = () => {
-        navigation.navigate('Register');
+    const OnPress_Singin = () => {
+        navigation.navigate('Login');
     }
 
-    const username = useSelector((state) => state.login_reducer.username);
-    const password = useSelector((state) => state.login_reducer.password);
-
-    const OnPress_SingIn = () => {
-        props.OnPress_SingIn({username:username.payload, password:password.payload});
+    const OnPress_Btn = () => {
+        props.Handler_changes();
     }
 
     return(
         <View style={style.container}>
             <Button
                 style={style.buttomStyle}
-                title="Sing in"
+                title="Sing up"
                 color={Colors_services.Get_ColorsPack()["Roxo_escuro"]}
-                onPress={() => OnPress_SingIn()}
+                onPress={() => OnPress_Btn()}
             />
-            <Text style={[style.inputColor, style.inputBottom]}>Dont you have an account? 
-                <Text style={style.inputStrongColor} onPress={() => {OnPress_Register()}} > Register here!</Text>
+            <Text style={[style.inputColor, style.inputBottom]}>Already have an account? 
+                <Text style={style.inputStrongColor} onPress={() => {OnPress_Singin()}}> Sing in!</Text>
             </Text>
         </View>
     );
@@ -61,4 +56,4 @@ const style = StyleSheet.create({
     }
 })
 
-export default ButtomLogin;
+export default ButtonRegister;

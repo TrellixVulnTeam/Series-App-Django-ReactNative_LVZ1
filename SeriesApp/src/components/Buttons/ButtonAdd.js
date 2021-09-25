@@ -4,7 +4,7 @@ import { Button } from "react-native";
 import Colors_services from "../../utils/Colors_layout";
 import * as RootNavigation from '../../utils/Navigate';
 
-export default function ButtomAdd(props){
+export default function ButtonAdd(props){
     const { name, title } = props;
 
 

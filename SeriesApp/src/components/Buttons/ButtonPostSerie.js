@@ -3,7 +3,7 @@ import { View, Button, StyleSheet } from 'react-native';
 
 import Colors_services from '../../utils/Colors_layout';
 
-export default function ButtomPostSerie(props){
+export default function ButtonPostSerie(props){
 
     const PostSerie = () => {
         props.Handler_changes();

@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import LoginHeader from '../components/Headers/LoginHeader';
 import FormLogin from '../components/Forms/FormLogin';
-import ButtomLogin from '../components/Buttons/ButtomLogin';
+import ButtonLogin from '../components/Buttons/ButtonLogin';
 
 import { useSelector, useDispatch } from 'react-redux';
 import store from '../store/store';
@@ -49,7 +49,7 @@ const LoginPage = (props) => {
                     contentContainerStyle={style.container}>
                     <LoginHeader />
                     <FormLogin error={error} error_message={error_message}/>
-                    <ButtomLogin navigation={navigation} OnPress_SingIn={OnPress_SingIn} />
+                    <ButtonLogin navigation={navigation} OnPress_SingIn={OnPress_SingIn} />
                 </KeyboardAwareScrollView>
             );
         }

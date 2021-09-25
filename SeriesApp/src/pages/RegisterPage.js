@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, ScrollView, SafeAreaView, Alert, ActivityIndica
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import RegisterHeader from '../components/Headers/RegisterHeader';
 import FormRegister from '../components/Forms/FormRegister';
-import ButtomRegister from '../components/Buttons/ButtomRegister';
+import ButtonRegister from '../components/Buttons/ButtonRegister';
 
 import { useSelector } from 'react-redux';
 
@@ -92,7 +92,7 @@ const RegisterPage = (props) => {
                 <RegisterHeader />
                 <FormRegister error={error} error_message={error_message} />
                 { loading ? <View style={style.activityIndicatorStyle}><ActivityIndicator size="large" color={Colors_services.Get_ColorsPack()["Roxo_escuro"]}/></View> 
-                : <ButtomRegister navigation={navigation} Handler_changes={Handler_changes} />}
+                : <ButtonRegister navigation={navigation} Handler_changes={Handler_changes} />}
             </KeyboardAwareScrollView>
     )
 }

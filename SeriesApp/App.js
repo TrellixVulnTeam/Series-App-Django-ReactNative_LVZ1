@@ -8,7 +8,7 @@ import Settings from './src/pages/Settings';
 import AddPage from './src/pages/AddPage';
 import DetailPage from './src/pages/DetailPage';
 
-import ButtomAdd from './src/components/Buttons/ButtomAdd';
+import ButtonAdd from './src/components/Buttons/ButtonAdd';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -43,10 +43,10 @@ function App(props) {
         <Stack.Screen name="Landing" component={LandingPage}  options={{
           title:"",
           headerRight: () => (
-            <ButtomAdd title="Add" name="AddPage" />
+            <ButtonAdd title="Add" name="AddPage" />
           ),
           headerLeft: () => (
-            <ButtomAdd title="Set" name="Settings" />
+            <ButtonAdd title="Set" name="Settings" />
           ),
           headerStyle:{
             backgroundColor: `${Colors_services.Get_ColorsPack()["Roxo_escuro"]}`

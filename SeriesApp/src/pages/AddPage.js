@@ -7,16 +7,15 @@ import FormSerie from '../components/Forms/FormSerie';
 import CreateHeader from '../components/Headers/CreateHeader';
 import APIServices from '../APIServices/APIServices';
 import store from '../store/store';
-import ButtomPostSerie from '../components/Buttons/ButtomPostSerie';
+import ButtonPostSerie from '../components/Buttons/ButtonPostSerie';
 
 export default function AddPage(props){
 
     const { navigation } = props;
     const token = store.getState().login_reducer.token;
 
-    const Redirect_user = () => {
-        navigation.navigate("Login");
-    }
+    const [ error, setError ] = useState(false);
+    const [ error_message, setMessage ] = useState("");
 
     const Post_Serie = (obj_params) => {
         setLoading(true);
@@ -36,7 +35,7 @@ export default function AddPage(props){
             );
         })
         .catch(error => {
-            setLoading(false); setError(true);
+            setLoading(false); setError(true); setMessage(error.message);
             Alert.alert(
                 "error",
                 "The app server side didn't send messages [Are you sure the API is working?]",
@@ -60,8 +59,8 @@ export default function AddPage(props){
     return(
         <KeyboardAwareScrollView keyboardShouldPersistTaps={'always'} contentContainerStyle={style.container}>
             <CreateHeader />
-            <FormSerie />
-            <ButtomPostSerie Handler_changes={Handler_changes}/>
+            <FormSerie error={error} error_message={error_message}/>
+            <ButtonPostSerie Handler_changes={Handler_changes}/>
         </KeyboardAwareScrollView>
     )
 }

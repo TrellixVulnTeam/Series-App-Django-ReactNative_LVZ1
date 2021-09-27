@@ -8,6 +8,8 @@ import CreateHeader from '../components/Headers/CreateHeader';
 import APIServices from '../APIServices/APIServices';
 import store from '../store/store';
 import ButtonPostSerie from '../components/Buttons/ButtonPostSerie';
+import { useDispatch } from 'react-redux';
+import { imgUrlSet } from '../store/postslice';
 
 export default function AddPage(props){
 
@@ -16,11 +18,16 @@ export default function AddPage(props){
 
     const [ error, setError ] = useState(false);
     const [ error_message, setMessage ] = useState("");
+    const [ loading, setLoading ] = useState(false);
+
+    const imgUrl = store.getState().login_reducer.imgUrl;
+
+    const dispatch = useDispatch();
 
     const Post_Serie = (obj_params) => {
         setLoading(true);
-
-        APIServices.DetailSeries(token, obj_params.id, {type:"POST"})
+        console.log(imgUrl ,"aqui");
+        APIServices.PostSerie(token, obj_params, imgUrl)
         .then(response => {
             setLoading(false); setError(false);
             Alert.alert(
@@ -36,6 +43,7 @@ export default function AddPage(props){
         })
         .catch(error => {
             setLoading(false); setError(true); setMessage(error.message);
+            console.log(JSON.stringify(error));
             Alert.alert(
                 "error",
                 "The app server side didn't send messages [Are you sure the API is working?]",
@@ -48,12 +56,7 @@ export default function AddPage(props){
     }
 
     const Handler_changes = (obj_params) => {
-        if ( Validators.Validate_nonEmptyInputList([username.payload, password.payload, confirm_password.payload, email.payload]) ){
-            Post_Serie(obj_params);
-        }
-        else{  
-            setError(true); setMessage(Message_errors.InputIsEmpty());
-        }
+        Post_Serie(obj_params);
     }
 
     return(

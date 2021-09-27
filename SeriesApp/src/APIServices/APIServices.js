@@ -56,22 +56,28 @@ export default class APIServices{
         }
     }
 
-    static PostSerie(token, obj_json, image){
-        var form = FormData();
+    static PostSerie(token, obj_json, imageUrl){
+        console.log(imageUrl);
+        var image = {
+            uri:imageUrl.payload.image
+        }
+
+        var form = new FormData();
         form.append("Seriepic", image);
         form.append("note", obj_json.note);
         form.append("title", obj_json.title);
         form.append("description", obj_json.description);
 
-        return axios({
-            method: 'POST',
-            url: Server_link + 'series/',
-            data: form,
+        console.log(Server_link + 'series/')
+
+        const url_link = Server_link + 'series/'
+
+        return axios.post(url_link, form, {
             headers:{
-                'Authorization': "Token  "  +  token,
+                'Authorization': `"Token ${token}`,
                 'Accept': 'application/json',
                 'Content-Type': 'multipart/form-data;'
-            }
-        })
+            }}
+        )
     }
 }

@@ -6,7 +6,8 @@ export const postReducers = createSlice({
       title:"",
       note:"",
       description:"",
-      imgUrl:""
+      imgUrl:"",
+      genres:[]
     },
     reducers: {
       titleSet: (state, action) => {
@@ -21,9 +22,12 @@ export const postReducers = createSlice({
       imgUrlSet: (state, action) => {
         state.imgUrl = action.payload;
       },
+      genreSet: (state, action) => {
+        state.genres = action.payload;
+      }
     },
 })
 
-export const { titleSet, noteSet, descriptionSet, imgUrlSet } = postReducers.actions;
+export const { titleSet, noteSet, descriptionSet, imgUrlSet, genreSet } = postReducers.actions;
 
 export default postReducers.reducer;

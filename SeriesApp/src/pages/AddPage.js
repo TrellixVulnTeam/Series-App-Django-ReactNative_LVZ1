@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Alert } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import FormSerie from '../components/Forms/FormSerie';
@@ -20,7 +20,7 @@ export default function AddPage(props){
     const [ error_message, setMessage ] = useState("");
     const [ loading, setLoading ] = useState(false);
 
-    const imgUrl = store.getState().login_reducer.imgUrl;
+    const imgUrl = store.getState().post_serie_reducer.imgUrl;
 
     const dispatch = useDispatch();
 
@@ -30,6 +30,7 @@ export default function AddPage(props){
         APIServices.PostSerie(token, obj_params, imgUrl)
         .then(response => {
             setLoading(false); setError(false);
+            console.log(JSON.stringify(response))
             Alert.alert(
                 'Success',
                 'Your Serie was created with success!',
@@ -43,7 +44,7 @@ export default function AddPage(props){
         })
         .catch(error => {
             setLoading(false); setError(true); setMessage(error.message);
-            console.log(JSON.stringify(error));
+            console.log(error.response.data);
             Alert.alert(
                 "error",
                 "The app server side didn't send messages [Are you sure the API is working?]",

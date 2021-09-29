@@ -10,8 +10,6 @@ export default function ListSeries (props){
 
     const { series } = props;
 
-    console.log(series);
-
     return(
         <View style={style.container}>
             {series.length !== 0 ? <FlatList 
@@ -24,7 +22,7 @@ export default function ListSeries (props){
             /> : null}
         </View>
     )
-}
+} 
 
 const style = StyleSheet.create({
     listContainer:{

@@ -11,8 +11,6 @@ export default function SerieContainer(props){
 
     const { serie } = props;
 
-    console.log(serie);
-
     return(
         <View style={style.container}>
             <View style={style.imgContainer}>

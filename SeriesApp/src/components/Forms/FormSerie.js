@@ -15,13 +15,24 @@ export default function FormSerie(props){
     const { error, error_message } = props;
 
     const [ genreString, setGenreString ] = useState("");
-    const [ title, setTilt ] = useState("");
-    const [ description, setDesc ] = useState("");
+    // const [ title, setTilt ] = useState("");
+    // const [ description, setDesc ] = useState("");
+
+    const title = store.getState().post_serie_reducer.title;
+    const description = store.getState().post_serie_reducer.description; 
 
     const Get_genreList = () => {
         const genreList = genreString.split(',');
 
         dispatch(genreSet({type:'set', payload:genres_list}));
+    }
+
+    const onChangeTitle = (text) => {
+        dispatch(titleSet({type:'set', payload:text}));
+    }
+
+    const onChangeDescription = (text) => {
+        dispatch(descriptionSet({type:'set', payload:text}));
     }
 
     const dispatch = useDispatch();
@@ -32,8 +43,8 @@ export default function FormSerie(props){
             <View style={style.view_input}>
                 <Text style={style.input}>Title</Text>
                 <TextInput
-                    value={title}
-                    onChangeText={(value) => {setTilt(value); dispatch(titleSet({type:'set',payload:value}))}}
+                    value={title.payload}
+                    onChangeText={(value) => { onChangeTitle(value) }}
                     multiline={true}
                     style={style.textinput}
                 />
@@ -58,8 +69,8 @@ export default function FormSerie(props){
             <View style={style.view_input}>
                 <Text style={style.input}>Description</Text>
                 <TextInput
-                    value={description}
-                    onChangeText={(value) => {setDesc(value); dispatch(descriptionSet({type:'set', payload:value}))}}
+                    value={description.payload}
+                    onChangeText={(value) => {onChangeDescription(value)}}
                     multiline={true}
                     numberOfLines = {4}
                     style={style.textinput}

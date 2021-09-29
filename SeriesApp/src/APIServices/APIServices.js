@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import { Link } from '@react-navigation/native';
+import { getStateFromPath, Link } from '@react-navigation/native';
+import { Platform } from 'react-native';
 
 export const Server_link = 'https://miketrctw.pythonanywhere.com/api/';
 
@@ -57,27 +58,36 @@ export default class APIServices{
     }
 
     static PostSerie(token, obj_json, imageUrl){
-        console.log(imageUrl);
+        var imageUri = imageUrl.payload.image;
+       
         var image = {
-            uri:imageUrl.payload.image
+            uri: Platform.OS === "android" ? imageUri.uri : imageUri.uri.replace("file://", ""),
+            type: 'image/jpeg', 
+            name: 'teste'
         }
 
         var form = new FormData();
-        form.append("Seriepic", image);
-        form.append("note", obj_json.note);
         form.append("title", obj_json.title);
+        form.append("note", obj_json.note);
         form.append("description", obj_json.description);
+        form.append("img_series", image);
 
-        console.log(Server_link + 'series/')
+        const url_link = Server_link + 'series/';
+        console.log(typeof(url_link))
 
-        const url_link = Server_link + 'series/'
+        console.log(form.values)
 
-        return axios.post(url_link, form, {
-            headers:{
-                'Authorization': `"Token ${token}`,
-                'Accept': 'application/json',
-                'Content-Type': 'multipart/form-data;'
-            }}
-        )
+        return axios.post({
+            method: 'POST',
+            data: form,
+            url: url_link,
+            config:{
+                headers:{
+                    'Content-Type':'multipart/form-data',
+                    'Authorization':`Token ${token}`,
+                    'Accept':'application/json'
+                }
+            }
+        })
     }
 }

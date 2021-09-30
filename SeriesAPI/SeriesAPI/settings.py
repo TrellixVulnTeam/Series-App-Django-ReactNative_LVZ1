@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-2(p+y3&r2%m5a$5=f4hh=*cz3c@p!tisbi*y%@x$3j3tkbtnm_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['miketrctw.pythonanywhere.com']
+ALLOWED_HOSTS = ['miketrctw.pythonanywhere.com', '127.0.0.1', '192.168.1.10']
 
 
 # Application definition
@@ -108,7 +108,12 @@ AUTH_PASSWORD_VALIDATORS = [
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
-    ]
+    ],
+    'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.JSONParser',
+        'rest_framework.parsers.MultiPartParser',
+        'rest_framework.parsers.FormParser'
+    )
 }
 
 

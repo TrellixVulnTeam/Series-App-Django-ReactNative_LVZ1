@@ -17,7 +17,7 @@ export default class APIServices{
 
     static SingupUser(obj_user){
         let Link_auth = Server_link + 'singup/';
-
+        console.log(Link_auth);
         return axios.post(Link_auth, obj_user);
     }
     
@@ -52,7 +52,7 @@ export default class APIServices{
 
             case 'GET':
                 return axios.get(Link_auth, {
-                    auth: `Token ${token.payload}`
+                    headers:{Authorization: `Token ${token.payload}`},
                 });
         }
     }
@@ -62,7 +62,7 @@ export default class APIServices{
        
         var image = {
             uri: Platform.OS === "android" ? imageUri.uri : imageUri.uri.replace("file://", ""),
-            type: 'image/jpeg', 
+            type: `image/jpeg`, 
             name: 'teste'
         }
 
@@ -70,23 +70,15 @@ export default class APIServices{
         form.append("title", obj_json.title);
         form.append("note", obj_json.note);
         form.append("description", obj_json.description);
-        form.append("img_series", image);
+        form.append('img_series', image);
 
-        const url_link = Server_link + 'series/';
-        console.log(typeof(url_link))
+        const url_link = Server_link +  'series/';
 
-        console.log(form.values)
-
-        return axios.post({
-            method: 'POST',
-            data: form,
-            url: url_link,
-            config:{
-                headers:{
-                    'Content-Type':'multipart/form-data',
-                    'Authorization':`Token ${token}`,
-                    'Accept':'application/json'
-                }
+        return axios.post(url_link, form, {
+            headers:{
+                'Content-Type':'multipart/form-data',
+                'Authorization':`Token ${token}`,
+                'Accept':'application/json',
             }
         })
     }

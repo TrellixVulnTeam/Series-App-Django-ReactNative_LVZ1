@@ -13,3 +13,4 @@ class SeriesSerializer(serializers.ModelSerializer):
     class Meta():
         model = Series
         fields = ['id', 'title', 'note', 'description', 'img_series', 'genres']
+        extra_kwargs = {'img_series':{"required":False, "allow_null":True}}

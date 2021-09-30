@@ -27,7 +27,7 @@ export default function AddPage(props){
     const Post_Serie = (obj_params) => {
         setLoading(true);
         console.log(imgUrl ,"aqui");
-        APIServices.PostSerie(token, obj_params, imgUrl)
+        APIServices.PostSerie(token.payload, obj_params, imgUrl)
         .then(response => {
             setLoading(false); setError(false);
             console.log(JSON.stringify(response))
@@ -44,14 +44,14 @@ export default function AddPage(props){
         })
         .catch(error => {
             setLoading(false); setError(true); setMessage(error.message);
-            console.log(error.response.data);
+            console.log(JSON.stringify(error));
             Alert.alert(
                 "error",
-                "The app server side didn't send messages [Are you sure the API is working?]",
-                {
+                `${JSON.stringify(error.response.data)}`,
+               [ {
                     text:"Ok",
                     onPress: () => {}
-                }
+                }]
             );
         })
     }

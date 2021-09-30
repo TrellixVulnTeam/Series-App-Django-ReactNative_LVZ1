@@ -15,7 +15,7 @@ const load_per_scroll = 10;
 const LandingPage = (props) => {
     const [ series, setSeries ] = useState([]);
     const [ loading, setLoading ] = useState(false);
-    const [ initialStateValue, setStateValue ] = useState(10);
+    const [ initialStateValue, setStateValue ] = useState(15);
     const [ error, setError ] = useState(false);
     const [ error_message, setMessage ] = useState("");
 
@@ -25,7 +25,7 @@ const LandingPage = (props) => {
     useEffect(() => {
         Get_series();
     }, [])
-
+    
     useEffect(() => {
         Add_NewSerie()
     },[newSerie])

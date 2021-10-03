@@ -63,7 +63,7 @@ export default class APIServices{
         var image = {
             uri: Platform.OS === "android" ? imageUri.uri : imageUri.uri.replace("file://", ""),
             type: `image/jpeg`, 
-            name: 'teste'
+            name: 'imagem'
         }
 
         var form = new FormData();

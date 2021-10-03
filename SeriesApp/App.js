@@ -14,10 +14,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { navigationRef } from './src/utils/Navigate';
 
-
 import store from './src/store/store';
 import { Provider, useSelector } from 'react-redux';
 import Colors_services from './src/utils/Colors_layout';
+import NavigationSettings from './src/utils/NavigationSettings';
 
 const Stack = createNativeStackNavigator();
 
@@ -52,15 +52,9 @@ function App(props) {
             backgroundColor: `${Colors_services.Get_ColorsPack()["Roxo_escuro"]}`
           }
         }}/>
-        <Stack.Screen  name="Settings" component={Settings} />
-        <Stack.Screen  name="AddPage" component={AddPage} options={{
-          title:'Add a new Serie',
-          headerStyle:{
-            backgroundColor: `${Colors_services.Get_ColorsPack()["Roxo_escuro"]}`,
-          },
-          headerTintColor:'white'
-        }}/>
-        <Stack.Screen  name="DetailPage" component={DetailPage} />
+        <Stack.Screen  name="Settings" component={Settings} options={NavigationSettings.navigationOptions}/>
+        <Stack.Screen  name="AddPage" component={AddPage} options={NavigationSettings.navigationOptionsDynamic({title:'Add a new Serie'})}/>
+        <Stack.Screen  name="DetailPage" component={DetailPage} options={NavigationSettings.navigationOptions}/>
         </>
         ) 
           :  (

@@ -13,8 +13,6 @@ export default class NavigationSettings{
 
     static navigationOptionsDynamic = (props) => {
 
-        console.log(props);
-
         return (
             {
                 title: (props.title !== undefined ? props.title : ""), 

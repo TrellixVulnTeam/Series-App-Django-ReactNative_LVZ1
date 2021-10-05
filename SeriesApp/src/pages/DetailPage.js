@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -9,10 +9,18 @@ import Colors_services from '../utils/Colors_layout';
 import { Dimensions } from 'react-native';
 
 import IsPortrait from '../components/utils/IsPortrait';
+import { useDispatch } from 'react-redux';
+import { setIndex } from '../store/serieslice';
 
 export default function DetailPage(props){
 
     const { detail } = props.route.params;
+
+    const dispatch = useDispatch();
+
+    useEffect(()=>{
+        dispatch(setIndex({type:'set', payload:detail.item.index}));
+    })
 
     return(
         <ScrollView style={style.container}>
@@ -39,7 +47,7 @@ const style = StyleSheet.create({
     },
     imgContainer:{
         flex:1,
-        height: { IsPortrait.isPortrait() ? Dimensions.get('window').height * 0.7 : Dimensions.get('window').widht * 0.7},
+        height: IsPortrait.isPortrait() ? Dimensions.get('window').height * 0.7 : Dimensions.get('window').width * 0.7,
         padding:80,
         paddingLeft:80,
         paddingRight:80

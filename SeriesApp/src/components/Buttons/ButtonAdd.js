@@ -1,18 +1,30 @@
 import React from "react";
 
-import { Button } from "react-native";
+import { Button, View, Image, TouchableOpacity, StyleSheet } from "react-native";
 import Colors_services from "../../utils/Colors_layout";
 import * as RootNavigation from '../../utils/Navigate';
 
-export default function ButtonAdd(props){
-    const { name, title } = props;
+import { dataIcons } from "../utils/Logo";
 
+export default function ButtonAdd(props){
+
+    const { name, title, nameIcon } = props;
 
     return (
-        <Button
+        <TouchableOpacity
             onPress={() => {RootNavigation.navigate(name)}}
-            title={title}
-            color={Colors_services.Get_ColorsPack()["Azul_claro"]}
-        />
+        >
+            <Image 
+                source={dataIcons[nameIcon]}
+                style={style.styleImg}
+            />
+        </TouchableOpacity>
     )
 }
+
+const style = StyleSheet.create({
+    styleImg:{
+        width: 30,
+        height: 30
+    }
+})

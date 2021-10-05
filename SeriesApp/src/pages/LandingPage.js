@@ -9,11 +9,12 @@ import APIServices from '../APIServices/APIServices';
 import store from '../store/store';
 import Warning from '../components/utils/Warning';
 import ListSeries from '../components/Grid/ListSeries';
+import { useDispatch } from 'react-redux';
+import { setSeries } from '../store/serieslice';
 
 const load_per_scroll = 10;
 
 const LandingPage = (props) => {
-    const [ series, setSeries ] = useState([]);
     const [ loading, setLoading ] = useState(false);
     const [ initialStateValue, setStateValue ] = useState(15);
     const [ error, setError ] = useState(false);
@@ -21,6 +22,10 @@ const LandingPage = (props) => {
 
     const newSerie = store.getState().login_reducer.new_app;
     const token = store.getState().login_reducer.token;
+
+    const series = store.getState().series.series;
+
+    const dispatch = useDispatch();
 
     useEffect(() => {
         Get_series();
@@ -32,7 +37,7 @@ const LandingPage = (props) => {
 
     const Add_NewSerie = () => {
         const series = [...series, newSerie];
-        setSeries(series);
+        dispatch(setSeries({type:'set',payload:series}));
     }
 
     const Is_Loading = () => {
@@ -48,7 +53,7 @@ const LandingPage = (props) => {
     const Add_series = () => {
         APIServices.ListSeries_page(token, series.length, (series.length + load_per_scroll))
         .then(response => { 
-            setSeries([...series, ...response.data]);
+            dispatch(setSeries({type:'set',payload:[...series, ...response.data]}));
             setError(false);
         })
         .catch(error => {
@@ -61,7 +66,7 @@ const LandingPage = (props) => {
         setLoading(true);
         APIServices.ListSeries_page(token, 0, initialStateValue)
         .then(response => {
-            setSeries(response.data);
+            dispatch(setSeries({type:'set',payload:response.data}));
             setLoading(false); setError(false);
         })
         .catch(error => {

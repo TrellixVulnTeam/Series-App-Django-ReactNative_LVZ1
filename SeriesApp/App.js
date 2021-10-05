@@ -9,6 +9,7 @@ import AddPage from './src/pages/AddPage';
 import DetailPage from './src/pages/DetailPage';
 
 import ButtonAdd from './src/components/Buttons/ButtonAdd';
+import ButtonDelete from './src/components/Buttons/ButtonDelete';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -43,10 +44,10 @@ function App(props) {
         <Stack.Screen name="Landing" component={LandingPage}  options={{
           title:"",
           headerRight: () => (
-            <ButtonAdd title="Add" name="AddPage" />
+            <ButtonAdd title="Add" name="AddPage" typeIcon="PNG" nameIcon="addIcon" />
           ),
           headerLeft: () => (
-            <ButtonAdd title="Set" name="Settings" />
+            <ButtonAdd title="Set" name="Settings" typeIcon="PNG" nameIcon="settingIcon"/>
           ),
           headerStyle:{
             backgroundColor: `${Colors_services.Get_ColorsPack()["Roxo_escuro"]}`
@@ -54,7 +55,11 @@ function App(props) {
         }}/>
         <Stack.Screen  name="Settings" component={Settings} options={NavigationSettings.navigationOptions}/>
         <Stack.Screen  name="AddPage" component={AddPage} options={NavigationSettings.navigationOptionsDynamic({title:'Add a new Serie'})}/>
-        <Stack.Screen  name="DetailPage" component={DetailPage} options={NavigationSettings.navigationOptions}/>
+        <Stack.Screen  name="DetailPage" component={DetailPage} options={Object.assign(NavigationSettings.navigationOptionsDynamic({title:'Detail'}), {
+          headerRight: () => (
+            <ButtonDelete />
+          )
+        } )}/>
         </>
         ) 
           :  (

@@ -12,10 +12,10 @@ export default function ListSeries (props){
 
     return(
         <View style={style.container}>
-            {series.length !== 0 ? <FlatList 
+            {series.payload.length !== 0 ? <FlatList 
                 style={style.container}
                 contentContainerStyle={style.containerList}
-                data={series}
+                data={series.payload}
                 numColumns={row}
                 renderItem={(item) => {return <SerieContainer serie={item} />}}
                 keyExtractor={(item) => item.id}

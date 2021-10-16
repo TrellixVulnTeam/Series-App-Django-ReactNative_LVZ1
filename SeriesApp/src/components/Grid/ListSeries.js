@@ -10,9 +10,11 @@ export default function ListSeries (props){
 
     const { series } = props;
 
+    console.log(series);
+
     return(
         <View style={style.container}>
-            {series.payload.length !== 0 ? <FlatList 
+            {series.length !== 0 ? <FlatList 
                 style={style.container}
                 contentContainerStyle={style.containerList}
                 data={series.payload}

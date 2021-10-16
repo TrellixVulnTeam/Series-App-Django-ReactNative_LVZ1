@@ -10,17 +10,22 @@ import { Dimensions } from 'react-native';
 
 import IsPortrait from '../components/utils/IsPortrait';
 import { useDispatch } from 'react-redux';
-import { setIndex } from '../store/serieslice';
+import { setIndex, setItem } from '../store/serieslice';
+import store from '../store/store';
+
+import FindIndex from '../utils/FindIndex';
 
 export default function DetailPage(props){
 
     const { detail } = props.route.params;
+    const series = store.getState().series.series;
 
     const dispatch = useDispatch();
 
     useEffect(()=>{
-        dispatch(setIndex({type:'set', payload:detail.item.index}));
-    })
+        dispatch(setIndex({type:'set', payload:FindIndex(series.payload, detail.item)}));
+        dispatch(setItem({type:'set', payload: detail.item}));
+    }, [])
 
     return(
         <ScrollView style={style.container}>

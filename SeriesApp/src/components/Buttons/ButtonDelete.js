@@ -7,18 +7,33 @@ import * as RootNavigation from '../../utils/Navigate';
 import store from "../../store/store";
 import { useDispatch } from "react-redux";
 import { setSeries } from "../../store/serieslice";
+import RemoveItemArray from "../../utils/RemoveItem";
+
+import APIServices from "../../APIServices/APIServices";
 
 export default function ButtonDelete(props){
 
     const dispatch = useDispatch();
     const series = store.getState().series.series;
+    const id = store.getState().series.index_detail;
+    const item = store.getState().series.item_detail;
+
+    const token = store.getState().login_reducer.token;
 
     const Pressing_btnDelete = () => {
-        const Get_withoutElement = series;
+        console.log(token, item.payload.id);
+        dispatch(setSeries({type:"set",payload: RemoveItemArray(series.payload, id.payload)}));
 
-        console.log(Get_withoutElement)
+        try{
+            APIServices.DetailSeries(token, item.payload.id, {type:'DELETE'})
+            .then( response => {
+                console.log(response.data);
+            })
+        } 
+        catch(error){
+            console.log(error.response.data);
+        }
 
-        dispatch(setSeries({type:"set",payload:undefined}))
         RootNavigation.navigate('Landing');
     }
 

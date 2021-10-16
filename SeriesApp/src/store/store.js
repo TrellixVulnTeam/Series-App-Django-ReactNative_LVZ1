@@ -7,6 +7,6 @@ export default configureStore ({
     reducer:{
         login_reducer: reducersReducer,
         post_serie_reducer: postReducers,
-        series:seriesReducers
+        series: seriesReducers
     },
 })

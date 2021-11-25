@@ -8,6 +8,7 @@ import store from "../../store/store";
 import { useDispatch } from "react-redux";
 import { setSeries } from "../../store/serieslice";
 import RemoveItemArray from "../../utils/RemoveItem";
+import { UpdateSeries } from "../utils/UpdateSeries";
 
 import APIServices from "../../APIServices/APIServices";
 
@@ -21,24 +22,18 @@ export default function ButtonDelete(props){
     const token = store.getState().login_reducer.token;
 
     const Pressing_btnDelete = () => {
-        console.log(token, item.payload.id);
-        dispatch(setSeries({type:"set",payload: RemoveItemArray(series.payload, id.payload)}));
 
         try{
             APIServices.DetailSeries(token, item.payload.id, {type:'DELETE'})
             .then( response => {
-                console.log(response.data);
-                const new_serie = RemoveItemArray(series.payload, id.payload);
-                dispatch(setSeries({type:'set',payload:new_serie}));
-
-                console.log(series.payload);
+                UpdateSeries().then(() => {
+                    RootNavigation.navigate('Landing');
+                })
             })
         } 
         catch(error){
             console.log(error.response.data);
         }
-
-        RootNavigation.navigate('Landing');
     }
 
     const AreyouSure = () => {

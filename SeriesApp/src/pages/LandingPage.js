@@ -9,21 +9,34 @@ import APIServices from '../APIServices/APIServices';
 import store from '../store/store';
 import Warning from '../components/utils/Warning';
 import ListSeries from '../components/Grid/ListSeries';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setSeries } from '../store/serieslice';
 
-const load_per_scroll = 10;
+export const load_per_scroll = 10;
+export const initialStateValue = 15;
+
+export const Get_series = () => {
+    setLoading(true);
+    APIServices.ListSeries_page(token, 0, initialStateValue)
+    .then(response => {
+        dispatch(setSeries({type:'set',payload:response.data}));
+        setLoading(false); setError(false);
+    })
+    .catch(error => {
+        setLoading(false); setError(true);
+        setMessage(error.message);
+    });
+}
 
 const LandingPage = (props) => {
     const [ loading, setLoading ] = useState(false);
-    const [ initialStateValue, setStateValue ] = useState(15);
     const [ error, setError ] = useState(false);
     const [ error_message, setMessage ] = useState("");
 
     const newSerie = store.getState().login_reducer.new_app;
     const token = store.getState().login_reducer.token;
 
-    const series = store.getState().series.series;
+    const series = useSelector((state) => state.series.series);
 
     const dispatch = useDispatch();
 
@@ -83,12 +96,11 @@ const LandingPage = (props) => {
                 <Warning error_message={error_message} /> 
             )
         }
-
         return (
             <ListSeries series={series} />
         )
     }
-
+    
     return (
         <View style={style.container}>
             {Handle_changes()}

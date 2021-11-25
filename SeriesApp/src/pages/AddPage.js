@@ -11,6 +11,9 @@ import ButtonPostSerie from '../components/Buttons/ButtonPostSerie';
 import { useDispatch, useSelector } from 'react-redux';
 import { imgUrlSet } from '../store/postslice';
 import { setSeries } from '../store/serieslice';
+import { initialStateValue } from './LandingPage';
+
+import {UpdateSeries} from '../components/utils/UpdateSeries'; 
 
 export default function AddPage(props){
 
@@ -23,9 +26,12 @@ export default function AddPage(props){
 
     const imgUrl = useSelector((state) => state.post_serie_reducer.imgUrl);
 
-    const dispatch = useDispatch();
-
-    const series = useSelector((state) => state.series.series);
+    const Update_series = () => {
+        UpdateSeries().then(() => {
+            navigation.navigate("Landing");
+        })
+        .catch(error => {console.log(error)});
+    }
 
     const Post_Serie = (obj_params) => {
         setLoading(true);
@@ -38,7 +44,7 @@ export default function AddPage(props){
                 [
                  {
                     text:"Ok",
-                    onPress: () => {navigation.navigate("landing")}
+                    onPress: () => {Update_series()}
                  }
                 ]
             );

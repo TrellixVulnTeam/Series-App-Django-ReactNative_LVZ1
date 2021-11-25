@@ -16,7 +16,10 @@ export default function SerieContainer(props){
     return(
         <View style={style.container}>
             <TouchableOpacity style={style.touchStyle}
-                onPress={() => {RootNavigation.navigate("DetailPage", {detail:serie})}}
+                onPress={() => {
+                    console.log(serie.item);
+                    RootNavigation.navigate("DetailPage", {detail:serie.item});
+                }}
             >
                 <View style={style.imgContainer}>
                     <Image

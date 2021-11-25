@@ -30,11 +30,11 @@ const LandingPage = (props) => {
     useEffect(() => {
         Get_series();
     }, [])
-    
+
     useEffect(() => {
         Add_NewSerie()
     },[newSerie])
-
+    
     const Add_NewSerie = () => {
         const series = [...series, newSerie];
         dispatch(setSeries({type:'set',payload:series}));

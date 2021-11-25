@@ -43,7 +43,6 @@ export default function Imagepicker(props){
         });
 
         if (!result.cancelled) {
-            console.log(result)
             dispatch(imgUrlSet({type:'set', payload:{image:result}}));
             setUrl(result.uri);
         }

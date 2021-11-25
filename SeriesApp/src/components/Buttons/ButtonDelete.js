@@ -28,6 +28,10 @@ export default function ButtonDelete(props){
             APIServices.DetailSeries(token, item.payload.id, {type:'DELETE'})
             .then( response => {
                 console.log(response.data);
+                const new_serie = RemoveItemArray(series.payload, id.payload);
+                dispatch(setSeries({type:'set',payload:new_serie}));
+
+                console.log(series.payload);
             })
         } 
         catch(error){

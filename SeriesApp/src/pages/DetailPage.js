@@ -23,8 +23,8 @@ export default function DetailPage(props){
     const dispatch = useDispatch();
 
     useEffect(()=>{
-        dispatch(setIndex({type:'set', payload:FindIndex(series.payload, detail.item)}));
-        dispatch(setItem({type:'set', payload: detail.item}));
+        dispatch(setIndex({type:'set', payload:FindIndex(series.payload, detail)}));
+        dispatch(setItem({type:'set', payload: detail}));
     }, [])
 
     return(
@@ -32,14 +32,14 @@ export default function DetailPage(props){
             <View style={style.imgContainer}>
                 <Image 
                     style={style.imgStyle}
-                    source={{uri:  Server_linkMain + detail.item.img_series}}
+                    source={{uri:  Server_linkMain + detail.img_series}}
                 />
             </View>
             <View style={style.metaContainer}>
                 <View style={style.dadosContainer}>
-                    <Text style={[style.styleStr, {fontSize:25}]}> {detail.item.title} </Text>
-                    <Text style={style.styleStr}>Note: <Text>{detail.item.note}</Text> </Text>
-                    <Text style={{fontSize:25}}> {detail.item.description} </Text>
+                    <Text style={[style.styleStr, {fontSize:25}]}> {detail.title} </Text>
+                    <Text style={style.styleStr}>Note: <Text>{detail.note}</Text> </Text>
+                    <Text style={{fontSize:25}}> {detail.description} </Text>
                 </View>
             </View>
         </ScrollView>

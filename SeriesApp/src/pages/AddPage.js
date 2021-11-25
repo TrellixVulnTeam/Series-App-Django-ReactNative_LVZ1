@@ -8,8 +8,9 @@ import CreateHeader from '../components/Headers/CreateHeader';
 import APIServices from '../APIServices/APIServices';
 import store from '../store/store';
 import ButtonPostSerie from '../components/Buttons/ButtonPostSerie';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { imgUrlSet } from '../store/postslice';
+import { setSeries } from '../store/serieslice';
 
 export default function AddPage(props){
 
@@ -20,24 +21,24 @@ export default function AddPage(props){
     const [ error_message, setMessage ] = useState("");
     const [ loading, setLoading ] = useState(false);
 
-    const imgUrl = store.getState().post_serie_reducer.imgUrl;
+    const imgUrl = useSelector((state) => state.post_serie_reducer.imgUrl);
 
     const dispatch = useDispatch();
 
+    const series = useSelector((state) => state.series.series);
+
     const Post_Serie = (obj_params) => {
         setLoading(true);
-        console.log(imgUrl ,"aqui");
         APIServices.PostSerie(token.payload, obj_params, imgUrl)
         .then(response => {
             setLoading(false); setError(false);
-            console.log(JSON.stringify(response))
             Alert.alert(
                 'Success',
                 'Your Serie was created with success!',
                 [
                  {
                     text:"Ok",
-                    onPress: () => {navigation.navigate("Landing")}
+                    onPress: () => {navigation.navigate("landing")}
                  }
                 ]
             );

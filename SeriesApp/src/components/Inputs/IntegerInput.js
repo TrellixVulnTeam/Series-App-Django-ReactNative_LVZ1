@@ -1,15 +1,11 @@
 import React, { useState } from 'react';
 
-import store from '../../store/store';
-
 import { View, Text, StyleSheet, Button } from 'react-native';
 import Colors_services from '../../utils/Colors_layout';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { noteSet } from '../../store/postslice';
 
 export default function IntegerInput(props){
-
-    const note = store.getState().post_serie_reducer.note; 
     const [ noteState, setNote ] = useState(0);
 
     const dispatch = useDispatch();

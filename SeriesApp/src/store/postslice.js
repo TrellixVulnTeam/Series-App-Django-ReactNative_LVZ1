@@ -4,7 +4,7 @@ export const postReducers = createSlice({
     name:'postreducers',
     initialState:{
       title:"",
-      note:"",
+      note:0,
       description:"",
       imgUrl:"",
       genres:[]

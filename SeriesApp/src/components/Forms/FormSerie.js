@@ -6,7 +6,6 @@ import Size_services from '../../utils/Size_layout';
 import Imagepicker from '../Image/ImagePicker';
 
 import { useDispatch, useSelector } from 'react-redux';
-import store from '../../store/store';
 import { descriptionSet, genreSet, titleSet } from '../../store/postslice';
 import IntegerInput from '../Inputs/IntegerInput';
 import Warning from '../utils/Warning';
@@ -18,8 +17,8 @@ export default function FormSerie(props){
     // const [ title, setTilt ] = useState("");
     // const [ description, setDesc ] = useState("");
 
-    const title = store.getState().post_serie_reducer.title;
-    const description = store.getState().post_serie_reducer.description; 
+    const title = useSelector((state) => state.post_serie_reducer.title);
+    const description = useSelector((state) => state.post_serie_reducer.description);
 
     const Get_genreList = () => {
         const genreList = genreString.split(',');

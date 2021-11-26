@@ -53,7 +53,7 @@ function App(props) {
             backgroundColor: `${Colors_services.Get_ColorsPack()["Roxo_escuro"]}`
           }
         }}/>
-        <Stack.Screen  name="Settings" component={Settings} options={NavigationSettings.navigationOptions}/>
+        <Stack.Screen  name="Settings" component={Settings} options={NavigationSettings.navigationOptionsDynamic({title:''})}/>
         <Stack.Screen  name="AddPage" component={AddPage} options={NavigationSettings.navigationOptionsDynamic({title:'Add a new Serie'})}/>
         <Stack.Screen  name="DetailPage" component={DetailPage} options={Object.assign(NavigationSettings.navigationOptionsDynamic({title:'Detail'}), {
           headerRight: () => (

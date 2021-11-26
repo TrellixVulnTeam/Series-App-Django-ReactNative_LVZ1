@@ -4,8 +4,7 @@ import { StyleSheet, TouchableOpacity, Image, View, Alert } from "react-native";
 import { dataIcons } from "../utils/Logo";
 import * as RootNavigation from '../../utils/Navigate';
 
-import store from "../../store/store";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setSeries } from "../../store/serieslice";
 import RemoveItemArray from "../../utils/RemoveItem";
 import { UpdateSeries } from "../utils/UpdateSeries";
@@ -14,12 +13,9 @@ import APIServices from "../../APIServices/APIServices";
 
 export default function ButtonDelete(props){
 
-    const dispatch = useDispatch();
-    const series = store.getState().series.series;
-    const id = store.getState().series.index_detail;
-    const item = store.getState().series.item_detail;
+    const item = useSelector((state) => state.series.item_detail);
 
-    const token = store.getState().login_reducer.token;
+    const token = useSelector((state) => state.login_reducer.token); 
 
     const Pressing_btnDelete = () => {
 

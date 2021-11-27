@@ -1,15 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+const initialState = {
+  username: "",
+  password:"",
+  confirm_password:"",
+  email:"",
+  token:null,
+  new_app:null
+}
+
 export const reducersPayload = createSlice({
     name: 'reducers',
-    initialState: {
-      username: "",
-      password:"",
-      confirm_password:"",
-      email:"",
-      token:null,
-      new_app:null
-    },
+    initialState,
     reducers: {
       OnchangeUsername: (state, action) => {
         state.username = action.payload;
@@ -28,11 +30,12 @@ export const reducersPayload = createSlice({
       },
       NewAppSet: (state, action) => {
         state.new_app = action.payload;
-      }
+      },
+      reset: () => initialState
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { OnchangeUsername, OnchangePassword, OnchangeConfirmPassword, OnchangeEmail, TokenSet, NewAppSet } = reducersPayload.actions;
+export const { OnchangeUsername, OnchangePassword, OnchangeConfirmPassword, OnchangeEmail, TokenSet, NewAppSet, reset } = reducersPayload.actions;
 
 export default reducersPayload.reducer;

@@ -4,6 +4,13 @@ import { View, Text, StyleSheet, FlatList } from 'react-native';
 import SettingsItens from '../components/Itens/SettingsItens';
 import { LOGOUT_IMAGE, INFORMATION_IMAGE } from '../utils/Images';
 
+import store from '../store/store';
+import { reset } from '../store/counterslice';
+
+const Reset_store = () => {
+    store.dispatch(reset());
+}
+
 const DATA_SETTINGS = [
     {
         title:'Logout',
@@ -11,7 +18,7 @@ const DATA_SETTINGS = [
         png_data: LOGOUT_IMAGE,
         action:{
             page:null,
-            method:null,
+            method:Reset_store,
         }
     },
     {

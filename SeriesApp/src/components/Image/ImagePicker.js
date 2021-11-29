@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
-
 import store from '../../store/store';
-
 import { useDispatch } from 'react-redux';
-
 import * as ImagePicker from 'expo-image-picker';
+import { NO_IMAGE_THUMB } from '../../utils/Images';
 
 import {
     StyleSheet,
@@ -21,7 +19,6 @@ export default function Imagepicker(props){
     const imgUrl = store.getState().post_serie_reducer.imgUrl;
     const [ Url, setUrl ] = useState("");
     const dispatch = useDispatch();
-
 
     useEffect(() => {
         (async () => {
@@ -63,17 +60,26 @@ export default function Imagepicker(props){
                 { Url !== "" ? <Image 
                     style={style.imgStyle}
                     source={{uri:Url}}
-                /> : null}
+                /> : <Image 
+                    style={style.imgStyle}
+                    source={NO_IMAGE_THUMB} />
+                    }
             </View>
             <View style={style.btnContainer}>
-                <Button  
-                    title="pick image"
-                    onPress={() => pickImageHandler()}
-                />
-                <Button  
-                    title="reset"
-                    onPress={() => reset()}
-                />
+                <View style={style.btnContainerSmall}>
+                    <Button  
+                        title="pick image"
+                        onPress={() => pickImageHandler()}
+                        style={style.btnStyle}
+                    />
+                </View>
+                <View style={style.btnContainerSmall}>
+                    <Button  
+                        title="reset"
+                        onPress={() => reset()}
+                        style={style.btnStyle}
+                    />
+                </View>
             </View>
         </View>
     )
@@ -81,18 +87,27 @@ export default function Imagepicker(props){
 
 const style = StyleSheet.create({
     container:{
-        flex:1
+        flex:1,
+        flexDirection: 'column'
     },
     btnContainer:{
-        marginTop: 10,
-        flex:1,
+        flex: 1,
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-evenly'
+    },
+    btnStyle:{
+    },
+    btnContainerSmall:{
+
     },
     imgView:{
-        flex:8
+        flex:1,
+        aspectRatio: 1.5,
+        resizeMode: 'contain'
     },
     imgStyle:{
-        flex:1
+        flex:1,
+        borderRadius: 10,
+        marginBottom: 10
     }
 })

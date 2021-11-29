@@ -44,10 +44,11 @@ const style = StyleSheet.create({
     container:{
         flexDirection: 'row',
         justifyContent: 'space-evenly',
-        paddingRight: 30
+        paddingRight: 30,
+        width: 250
     },
     numberContainer:{
-        flex: 1,
+        flex: 4,
         justifyContent: 'center',
         alignItems:'center',
         backgroundColor: Colors_services.Get_ColorsPack()["Cinza_claro"]

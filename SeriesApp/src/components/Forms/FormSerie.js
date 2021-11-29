@@ -82,7 +82,8 @@ export default function FormSerie(props){
 const style = StyleSheet.create({
     container:{
         flex:4,
-        justifyContent:'flex-start'
+        justifyContent:'flex-start',
+        marginBottom: 20
     },
     view_input:{
         flex:1,

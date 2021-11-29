@@ -28,7 +28,8 @@ export default function ButtonPostSerie(props){
 
 const style = StyleSheet.create({
     container:{
-        flex:1
+        flex:1,
+        marginBottom: 20
     },
     buttomStyle:{
 

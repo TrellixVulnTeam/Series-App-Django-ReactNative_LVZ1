@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { View, Text, StyleSheet, FlatList } from 'react-native';
+import { View, StyleSheet, FlatList, Alert } from 'react-native';
 import SettingsItens from '../components/Itens/SettingsItens';
 import { LOGOUT_IMAGE, INFORMATION_IMAGE } from '../utils/Images';
 
@@ -8,7 +8,20 @@ import store from '../store/store';
 import { reset } from '../store/counterslice';
 
 const Reset_store = () => {
-    store.dispatch(reset());
+    Alert.alert(
+        "Logout",
+        "Are you sure you want to logout?",
+        [
+            {
+                text: "yes",
+                onPress: () => {store.dispatch(reset());}
+            },
+            {
+                text: "no",
+                onPress: () => {}
+            }
+        ]
+    )
 }
 
 const DATA_SETTINGS = [
@@ -26,7 +39,7 @@ const DATA_SETTINGS = [
         id:2,
         png_data: INFORMATION_IMAGE,
         action:{
-            page:null,
+            page:'InformationPage',
             method:null,
         }
     }

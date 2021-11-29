@@ -19,6 +19,7 @@ import store from './src/store/store';
 import { Provider, useSelector } from 'react-redux';
 import Colors_services from './src/utils/Colors_layout';
 import NavigationSettings from './src/utils/NavigationSettings';
+import InformationPage from './src/pages/InformationPage';
 
 const Stack = createNativeStackNavigator();
 
@@ -60,6 +61,7 @@ function App(props) {
             <ButtonDelete />
           )
         } )}/>
+        <Stack.Screen  name="InformationPage" component={InformationPage} options={NavigationSettings.navigationOptionsDynamic({title:'Information'})}/>
         </>
         ) 
           :  (

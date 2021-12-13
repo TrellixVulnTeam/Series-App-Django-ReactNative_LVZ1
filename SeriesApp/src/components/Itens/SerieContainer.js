@@ -1,10 +1,8 @@
 import React from 'react';
 
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity,  Dimensions} from 'react-native';
 import { Server_linkMain } from '../../APIServices/APIServices';
 import Colors_services from '../../utils/Colors_layout';
-
-import { Dimensions } from 'react-native';
 import { row } from '../Grid/ListSeries';
 
 import * as RootNavigation from '../../utils/Navigate';
@@ -40,7 +38,7 @@ export default function SerieContainer(props){
 const style = StyleSheet.create({
     container:{
         flex:1,
-        height:250,
+        height: Dimensions.get('window').height / 3,
         margin:10,
     },
     imageStyle:{

@@ -57,15 +57,6 @@ export default function FormSerie(props){
                 <Imagepicker />
             </View>
             <View style={style.view_input}>
-                <Text style={style.input}>Genres</Text>
-                <TextInput
-                    value={genreString}
-                    onChangeText={(value) => {setGenreString(value)}}
-                    multiline={true}
-                    style={style.textinput}
-                />
-            </View>
-            <View style={style.view_input}>
                 <Text style={style.input}>Description</Text>
                 <TextInput
                     value={description.payload}

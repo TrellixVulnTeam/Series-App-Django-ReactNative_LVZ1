@@ -1,6 +1,8 @@
 # Series App review Made With Django and React Native
 
 A Series Review app made with React native using expo as front and django using django rest framework to create the API consumed by the frontend
+you can Create new series, upload images, delete series
+login and logout also register funcionalities included
 
 **Front end Techs**
 

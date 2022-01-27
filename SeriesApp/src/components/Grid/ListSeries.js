@@ -11,7 +11,7 @@ export default function ListSeries (props){
     const { series } = props;
     const [DATA, setData] = useState([]);
     const [FakeDATA, setFakeData] = useState([])
-
+    
     const fill_series = () => {
         const lines = parseInt(DATA.length / row) + 1;
         const qtd_serie_population = DATA.length;
@@ -25,8 +25,7 @@ export default function ListSeries (props){
 
     useEffect(() => {
         if (series !== undefined){
-            setData(series.payload);
-            fill_series();
+            setData(series.payload)
         }
     }, [series])
 
